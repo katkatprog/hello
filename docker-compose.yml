@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: ./api
+      args:
+        - API_WORKDIR=/workspace/api
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/workspace
+      - api_store:/usr/local/bundle/
+    ports:
+      - "3000:3000"
+    command: >
+      sh -c 
+        "tail -f /dev/null" 
+
+volumes:
+  api_store:
